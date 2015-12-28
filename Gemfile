@@ -49,3 +49,6 @@ end
 gem 'firebase'
 gem 'devise'
 
+gem 'gravatar-ultimate'
+
+

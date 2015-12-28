@@ -3,7 +3,7 @@ class ChatMessage < ActiveRecord::Base
   after_create :push_to_firebase
 
   def as_json(options={})
-    super(options).merge("nickname" => self.user.try(:nickname))
+    super(options).merge("nickname" => self.user.try(:nickname), "avatar_url" => self.user.try(:gravatar_url))
   end
 
   def push_to_firebase

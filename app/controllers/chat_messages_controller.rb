@@ -12,7 +12,7 @@ class ChatMessagesController < ApplicationController
       if all_messages.present? && all_messages.last[:user_id] == m.user_id
         all_messages.last[:messages] << m.body
       else
-        all_messages << m.as_json.with_indifferent_access.slice(:user_id, :body, :nickname, :id).merge(:messages => [m.body], :time => m.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%I:%M %p"))
+        all_messages << m.as_json.with_indifferent_access.slice(:user_id, :body, :nickname, :id, :avatar_url).merge(:messages => [m.body], :time => m.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%I:%M %p"))
       end
     end
     render :json => all_messages
