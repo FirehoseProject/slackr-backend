@@ -61,3 +61,21 @@ When you go to [http://localhost:4000](http://localhost:4000) you should be pres
 | *HTTP Verb* | *URL*         |
 |-------------|:-------------:|
 | POST        |  /users       |
+
+Expects a payload in the following format (with dummy data loaded in it):
+
+```
+{
+  "user": {
+    "email" : "someone@someplace.com",
+    "nickname": "someone",
+    "password": "secretPassword111"
+  }
+}
+```
+
+The following curl command will trigger the action.
+
+```
+curl -H "Content-type: application/json" -d '{ "user": { "email" : "someone@someplace.com", "nickname": "someone", "password": "secretPassword111" } }' 'http://localhost:3000/users'
+```
