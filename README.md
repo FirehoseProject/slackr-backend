@@ -1,10 +1,10 @@
-= Slackr Backend
+# Slackr Backend
 
 The Slackr application is broken into two separate applications.  First there is the front-end, where most of the logic in the application lives.
 
 This application is the backend of the application.  This is a standalone rails application that implements a simple API.
 
-== Getting the app up and running.
+## Getting the app up and running.
 
 To start with, on GitHub.com, click the fork button in the top-right corner.  This will make a copy of the project in your GitHub profile.
 
@@ -52,4 +52,4 @@ rails server -b 0.0.0.0
 
 When you go to [http://localhost:4000](http://localhost:4000) you should be presented a landing page for the backend of our application.  That means it's up and running.
 
-== API Documentation
+## API Documentation
