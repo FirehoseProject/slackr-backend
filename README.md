@@ -53,3 +53,11 @@ rails server -b 0.0.0.0
 When you go to [http://localhost:4000](http://localhost:4000) you should be presented a landing page for the backend of our application.  That means it's up and running.
 
 ## API Documentation
+
+### User Authentication
+
+*Create a user*.  
+
+| *HTTP Verb* | *URL*         |
+|-------------|:-------------:|
+| POST        |  /users       |
