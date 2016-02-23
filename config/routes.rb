@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users, :only => [:create, :index]
   resources :chat_messages, :only => [:create, :index]
   resources :user_sessions, :only => [:create]
+  delete "user_sessions", :to => 'user_sessions#destroy'
 #  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

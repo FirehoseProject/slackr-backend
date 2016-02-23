@@ -1,7 +1,8 @@
 class ChatMessagesController < ApplicationController
+  before_action :require_api_user, :only => :create
 
   def create
-    cm = ChatMessage.create(chat_message_params)
+    cm = api_user.chat_messages.create(chat_message_params)
     render :json => cm
   end
 
