@@ -13,6 +13,19 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def api_user
+    if params[:api_key].present?
+      User.where(:api_key => params[:api_key]).first
+    else
+      nil
+    end
+  end
+
+  def require_api_user
+    if api_user.blank?
+      render :text => "API User Not Found", :status => :unauthorized
+    end
+  end
 
   protected
 
