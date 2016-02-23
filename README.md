@@ -151,7 +151,7 @@ Expects a payload in the following format (with dummy data loaded in it):
 
 ```
 {
-  "user": {
+  "chat_message": {
     "body" : "Hello!"
   }
 }
