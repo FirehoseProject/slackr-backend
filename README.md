@@ -80,6 +80,34 @@ The following curl command will trigger the action.
 curl -H "Content-type: application/json" -d '{ "user": { "email" : "someone@someplace.com", "nickname": "someone", "password": "secretPassword111" } }' 'http://localhost:3000/users'
 ```
 
+**List all users**.
+
+| *HTTP Verb* | *URL*         |
+|-------------|:-------------:|
+| GET         |  /users       |
+
+
+Will return an array containing all of the users in the application, in the following format.
+
+```
+[{
+  "id": 1,
+  "email": "ken@thefirehoseproject.com",
+  "nickname": "ken mazaika",
+  "created_at": "2016-02-22T02:13:49.396Z",
+  "updated_at": "2016-02-25T21:12:11.405Z",
+  "gravatar_url": "http://www.gravatar.com/avatar/2a9b8f5273d934fe57daa8cf54c3a017?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
+  "api_key": "55098ddfb223cb6298ca841fb32b680f"
+}]
+```
+
+The following CURL command will trigger the action.
+
+```
+curl http://localhost:3000/users
+```
+
+
 **Authenticate a user**.  
 
 
