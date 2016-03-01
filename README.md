@@ -31,13 +31,13 @@ bundle install
 Create the database:
 
 ```
-rake db:create:all
+bundle exec rake db:create:all
 ```
 
 Run the migrations:
 
 ```
-rake db:migrate
+bundle exec rake db:migrate
 ```
 
 Each application will need a unique firebase URL.  Create an account with [Firebase](https://www.firebase.com/).  Create an app, and get a URL that looks like this:
@@ -47,7 +47,7 @@ Each application will need a unique firebase URL.  Create an account with [Fireb
 Then enter that URL in `config/firebase.yml`.  Then start the rails server by running the following command:
 
 ```
-rails server -b 0.0.0.0
+bundle exec rails server -b 0.0.0.0
 ```
 
 When you go to [http://localhost:4000](http://localhost:4000) you should be presented a landing page for the backend of our application.  That means it's up and running.
