@@ -60,6 +60,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.6.0)
+    faker (1.6.3)
+      i18n (~> 0.5)
     firebase (0.2.6)
       httpclient
       json
@@ -165,6 +167,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  faker
   firebase
   gravatar-ultimate
   jbuilder (~> 2.0)
