@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
   def populate_api_key
     self.api_key = SecureRandom.hex
   end
+
+  def as_json(options={})
+    super(options).merge(status: 'active')
+  end
 end
