@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
-  resources :users, :only => [:create, :index]
+  devise_for :api_users
+  scope ':api_key' do
+    resources :users, :only => [:create, :index]
+  end
   resources :chat_messages, :only => [:create, :index]
   resources :user_sessions, :only => [:create]
   delete "user_sessions", :to => 'user_sessions#destroy'
+  get 'api/test', :to => 'static_pages#test', :as => 'test_api'
+  get 'api/production', :to => 'static_pages#production', :as => 'production_api'
+
 #  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'static_pages#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

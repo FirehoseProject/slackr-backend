@@ -1,0 +1,45 @@
+<div class="container">
+<h1>Your API in Test Mode</h1>
+<%# link_to 'Switch to Production Mode', production_api_path %>
+<br />
+<table class="table table-striped">
+  <tr>
+    <td>API Key</td>
+    <td><%= current_api_user.test_api_key %></td>
+  </tr>
+  <tr>
+    <td>Firebase URL</td>
+    <td>https://firehose-slackr.firebaseio.com/<%= current_api_user.test_api_key %>/messages</td>
+  </tr>
+
+</table>
+
+<h2>Users</h2>
+<h3>Create a User</h3>
+<table class="table table-striped">
+  <tr>
+    <td>HTTP Verb</td>
+    <td><code>POST</code></td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/users</code></td>
+  </tr>
+
+</table>
+<p>
+Expects a payload in the following format (with dummy data loaded in it):
+</p>
+<pre><code>{
+  "user": {
+    "email" : "someone@someplace.com",
+    "nickname": "someone",
+    "password": "secretPassword111"
+  }
+}
+</code></pre>
+The following curl command will trigger the action.
+
+<pre><code>curl -H "Content-type: application/json" -d '{ "user": { "email" : "someone@someplace.com", "nickname": "someone", "password": "secretPassword111" } }' 'http://localhost:4000/<%= current_api_user.test_api_key %>/users'</code></pre>
+</div>
+

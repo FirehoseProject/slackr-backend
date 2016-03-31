@@ -2,11 +2,59 @@
 <html>
 <head>
   <title>SlackrBackend</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,100,700,400italic' rel='stylesheet' type='text/css'>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+  <title>Slackr Backend</title>
 </head>
 <body>
+
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+
+      <a class="navbar-brand" href="#">Slackr API</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="<%= params[:action] == 'test' ? 'active' : 'ss' %>"><%= link_to 'Test', test_api_path %>
+</li>
+        <li class="<%= params[:action] == 'production' ? 'active' : 'ss' %>"><%= link_to 'Production', production_api_path %>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Actions <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+
+
+  <% if current_api_user %>
+    <li><a><%= current_api_user.email %></a></li>
+                <li role="separator" class="divider"></li>
+
+    <li><%= link_to 'Sign Out', destroy_api_user_session_path, method: :delete %></li>
+  <% else %>
+   <li> <%= link_to 'Sign Up', new_api_user_registration_path %></li>
+   <li> <%= link_to 'Sign In', new_api_user_session_path %></li>
+  <% end %>
+
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
 
 <%= yield %>
 
