@@ -41,5 +41,59 @@ Expects a payload in the following format (with dummy data loaded in it):
 The following curl command will trigger the action.
 
 <pre><code>curl -H "Content-type: application/json" -d '{ "user": { "email" : "someone@someplace.com", "nickname": "someone", "password": "secretPassword111" } }' 'http://localhost:4000/<%= current_api_user.api_key %>/users'</code></pre>
+
+
+
+<h3>Authenticate a user</h3>
+
+<table class="table table-striped">
+  <tr>
+    <td>HTTP Verb</td>
+    <td><code>POST</code></td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td><code>http://localhost:4000/<%= current_api_user.api_key %>/users_sessions</code></td>
+  </tr>
+
+</table>
+<p>
+Expects a payload in the following format (with dummy data loaded in it):
+</p>
+<pre><code>{
+  "user": {
+    "email" : "someone@someplace.com",
+    "password": "secretPassword111"
+  }
+}</code></pre>
+
+<p>
+The following curl command will trigger the action.
+</p>
+
+<pre><code>curl -H "Content-type: application/json" -d '{ "user": { "email" : "someone@someplace.com", "password": "secretPassword111" } }' 'http://localhost:4000/<%= current_api_user.api_key %>/user_sessions'</code></pre>
+<p>
+The response will either include the full user information or if the authentication fails it will return the following JSON message.
+</p>
+
+<pre><code>{"errors":{"email":["Unable to authenticate"]}}</code></pre>
+<p>
+The response will include the API key for the authenticated user in the following format.
+</p>
+
+<pre><code>{
+  "id": 11,
+  "email": "someonekjkkjk@someplace.com",
+  "nickname": "someone",
+  "created_at": "2016-02-23T01:19:12.544Z",
+  "updated_at": "2016-02-23T01:19:12.544Z",
+  "gravatar_url": "http://www.gravatar.com/avatar/3534f789c8238f3d3383ccd67e178163?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
+  "api_key": "924c8286905bd0f5b81a26524449783e"
+}</code></pre>
+<p>
+Passing the user's API key to the service will treat them as the logged in user.
+</p>
+
+
 </div>
 

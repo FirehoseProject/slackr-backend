@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331200944) do
+ActiveRecord::Schema.define(version: 20160331205459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,9 +41,14 @@ ActiveRecord::Schema.define(version: 20160331200944) do
   create_table "chat_messages", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "mode"
+    t.integer  "api_user_id"
   end
+
+  add_index "chat_messages", ["api_user_id"], name: "index_chat_messages_on_api_user_id", using: :btree
+  add_index "chat_messages", ["mode"], name: "index_chat_messages_on_mode", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

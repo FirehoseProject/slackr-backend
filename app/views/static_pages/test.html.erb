@@ -41,5 +41,205 @@ Expects a payload in the following format (with dummy data loaded in it):
 The following curl command will trigger the action.
 
 <pre><code>curl -H "Content-type: application/json" -d '{ "user": { "email" : "someone@someplace.com", "nickname": "someone", "password": "secretPassword111" } }' 'http://localhost:4000/<%= current_api_user.test_api_key %>/users'</code></pre>
+
+
+
+
+
+
+
+<h3>List all users</h3>
+
+<table class="table table-striped">
+  <tr>
+    <td>HTTP Verb</td>
+    <td><code>GET</code></td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/users</code></td>
+  </tr>
+
+</table>
+
+<p>
+Will return an array containing all of the users in the application, in the following format.
+</p>
+
+<pre><code>[{
+  "id": 1,
+  "email": "ken@thefirehoseproject.com",
+  "nickname": "ken mazaika",
+  "created_at": "2016-02-22T02:13:49.396Z",
+  "updated_at": "2016-02-25T21:12:11.405Z",
+  "gravatar_url": "http://www.gravatar.com/avatar/2a9b8f5273d934fe57daa8cf54c3a017?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
+  "api_key": "55098ddfb223cb6298ca841fb32b680f"
+}]</code></pre>
+<p>
+The following CURL command will trigger the action.
+</p>
+
+<pre><code>curl http://localhost:3000/users</code></pre>
+
+
+
+<h3>Authenticate a user</h3>
+
+<table class="table table-striped">
+  <tr>
+    <td>HTTP Verb</td>
+    <td><code>POST</code></td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/users_sessions</code></td>
+  </tr>
+
+</table>
+<p>
+Expects a payload in the following format (with dummy data loaded in it):
+</p>
+<pre><code>{
+  "user": {
+    "email" : "someone@someplace.com",
+    "password": "secretPassword111"
+  }
+}</code></pre>
+
+<p>
+The following curl command will trigger the action.
+</p>
+
+<pre><code>curl -H "Content-type: application/json" -d '{ "user": { "email" : "someone@someplace.com", "password": "secretPassword111" } }' 'http://localhost:4000/<%= current_api_user.test_api_key %>/user_sessions'</code></pre>
+<p>
+The response will either include the full user information or if the authentication fails it will return the following JSON message.
+</p>
+
+<pre><code>{"errors":{"email":["Unable to authenticate"]}}</code></pre>
+<p>
+The response will include the API key for the authenticated user in the following format.
+</p>
+
+<pre><code>{
+  "id": 11,
+  "email": "someonekjkkjk@someplace.com",
+  "nickname": "someone",
+  "created_at": "2016-02-23T01:19:12.544Z",
+  "updated_at": "2016-02-23T01:19:12.544Z",
+  "gravatar_url": "http://www.gravatar.com/avatar/3534f789c8238f3d3383ccd67e178163?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
+  "api_key": "924c8286905bd0f5b81a26524449783e"
+}</code></pre>
+<p>
+Passing the user's API key to the service will treat them as the logged in user.
+</p>
+
+
+
+
+<h3>Logging Out</h3>
+
+<p>
+To logout running the following HTTP request well set the user's API key to `nil`, preventing them from interacting with the application until they login again (when a new API key will be generated).
+</p>
+
+<table class="table table-striped">
+  <tr>
+    <td>HTTP Verb</td>
+    <td><code>DELETE</code></td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/users_sessions?USERAPIKEY</code></td>
+  </tr>
+
+</table>
+
+<pre><code>curl -H "Content-type: application/json" -X DELETE 'http://localhost:4000/<%= current_api_user.test_api_key %>/user_sessions?api_key=USERAPIKEY'</code></pre>
+
+curl -H "Content-type: application/json" -X DELETE 'http://localhost:4000/62d5ced8987bd7be46c9/user_sessions?api_key=4bafca2436f95b3f0a01b8cb72a7741a'
+
+<h2>Chat Messages</h2>
+
+<h3>Create a messages</h3>
+
+<p>
+  The following API command will both create a chat message in the database and push it into Firebase as well.
+
+</p>
+
+<table class="table table-striped">
+  <tr>
+    <td>HTTP Verb</td>
+    <td><code>POST</code></td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/chat_messages?api_key=USERAPIKEY</code></td>
+  </tr>
+
+</table>
+
+<p>
+  Expects a payload in the following format (with dummy data loaded in it):
+</p>
+<pre><code>{
+  "chat_message": {
+    "body" : "Hello!"
+  }
+}</code></pre>
+<p>
+The following CURL command will trigger the action.
+</p>
+
+<pre><code>curl -H "Content-type: application/json" -d '{ "chat_message": { "body" : "Hello!"} }' 'http://localhost:4000/<%= current_api_user.test_api_key %>/chat_messages?api_key=USERAPIKEY'</code></pre>
+
+
+
+
+<h3>List out all chat messages</h3>
+
+<table class="table table-striped">
+  <tr>
+    <td>HTTP Verb</td>
+    <td><code>GET</code></td>
+  </tr>
+  <tr>
+    <td>URL</td>
+    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/chat_messages</code></td>
+  </tr>
+
+</table>
+
+The following CURL command will trigger it.
+
+
+<pre><code>curl -H "Content-type: application/json" http://localhost:3000/chat_messages</code></pre>
+
+<p>
+The API will clump multiple messages created by the same author into a single message.  The following is an example of the result from the API request.
+</p>
+
+
+<pre><code>[{
+  "user_id": 1,
+  "body": "Hello!",
+  "nickname": "someone",
+  "id": 2,
+  "avatar_url": "http://www.gravatar.com/avatar/50e8e8da10dfdfe6169289a99891cfc6?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
+  "messages": ["Hello!", "Second message"],
+  "time": "02:08 PM"
+}, {
+  "user_id": 2,
+  "body": "New Author",
+  "nickname": "someone",
+  "id": 4,
+  "avatar_url": "http://www.gravatar.com/avatar/47542a928b78888d91f3b08372e9de61?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
+  "messages": ["New Author"],
+  "time": "02:12 PM"
+}]</code></pre>
+
 </div>
+
+
+
 

@@ -2,12 +2,24 @@ class ChatMessagesController < ApplicationController
   before_action :require_api_user, :only => :create
 
   def create
-    cm = api_user.chat_messages.create(chat_message_params)
+    mode_and_user = ApiUser.mode_and_user(params[:api_user_key])
+    mode = mode_and_user[0]
+    api_user = mode_and_user[1]
+
+    user = api_user.users.where(:api_key => params[:api_key]).first
+
+    cm = user.chat_messages.create(chat_message_params.merge(:mode => mode, :api_user => api_user))
     render :json => cm
   end
 
   def index
-    messages = ChatMessage.order(:id).all
+
+    mode_and_user = ApiUser.mode_and_user(params[:api_user_key])
+    mode = mode_and_user[0]
+    api_user = mode_and_user[1]
+
+
+    messages = api_user.chat_messages.order(:id).all
     all_messages = []
     messages.each do |m|
       if all_messages.present? && all_messages.last[:user_id] == m.user_id

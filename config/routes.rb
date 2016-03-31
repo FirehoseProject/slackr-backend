@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   devise_for :api_users
-  scope ':api_key' do
+
+  scope ':api_user_key' do
+    resources :user_sessions, :only => [:create]
     resources :users, :only => [:create, :index]
+    delete "user_sessions", :to => 'user_sessions#destroy'
+    resources :chat_messages, :only => [:create, :index]
+
   end
-  resources :chat_messages, :only => [:create, :index]
-  resources :user_sessions, :only => [:create]
-  delete "user_sessions", :to => 'user_sessions#destroy'
   get 'api/test', :to => 'static_pages#test', :as => 'test_api'
   get 'api/production', :to => 'static_pages#production', :as => 'production_api'
 

@@ -6,6 +6,7 @@ class ApiUser < ActiveRecord::Base
 
   before_create :populate_api_keys
   has_many :users
+  has_many :chat_messages
  def populate_api_keys
     self.api_key = SecureRandom.hex(10)
     self.test_api_key = SecureRandom.hex(10)
