@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :chat_messages, :only => [:create, :index]
 
   end
-  get 'api/test', :to => 'static_pages#test', :as => 'test_api'
+  get 'api/sandbox', :to => 'static_pages#test', :as => 'test_api'
   get 'api/production', :to => 'static_pages#production', :as => 'production_api'
 
 #  devise_for :users
