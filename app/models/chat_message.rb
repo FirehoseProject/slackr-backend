@@ -3,7 +3,7 @@ class ChatMessage < ActiveRecord::Base
   after_create :push_to_firebase
   belongs_to :api_user
   def as_json(options={})
-    super(options).merge("nickname" => self.user.try(:nickname), "avatar_url" => self.user.try(:gravatar_url))
+    super(options).except("mode").merge("nickname" => self.user.try(:nickname), "avatar_url" => self.user.try(:gravatar_url))
   end
 
   def api_user_key

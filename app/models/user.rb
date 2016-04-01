@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(options).merge(status: 'active').except("mode")
+    json = super(options).merge(status: 'active').except("mode", "api_user_id")
+    json = json.except("api_key") if options.with_indifferent_access[:include_api_key] == false
+    json
   end
 end

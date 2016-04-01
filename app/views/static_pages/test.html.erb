@@ -34,8 +34,8 @@
 </ol>
 <h1 style="font-weight:normal; font-size:30px; font-weight:300; margin-top:24px; margin-bottom:20px;">Chat Messages</h1>
 <ol type="i">
-  <li>Create a chat message</li>
-  <li>List chat messages</li>
+  <li><a href="#chat_messages.create">Create chat message</a></li>
+  <li><a href="#chat_messages.list">List chat messages</a></li>
 </ol>
 <br style="clear:both;" />
 
@@ -70,7 +70,6 @@
   "updated_at": "2016-04-01T17:07:43.681Z",
   "gravatar_url": "http://www.gravatar.com/avatar/6c7f9db6d0e9184caa3af987ca65645a?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
   "api_key": "f6052930880ac0bec03194afa26b5aa6",
-  "api_user_id": "6",
   "status": "active"
 }</code></pre>
 <p>
@@ -99,13 +98,12 @@
   "created_at": "2016-02-22T02:13:49.396Z",
   "updated_at": "2016-02-25T21:12:11.405Z",
   "gravatar_url": "http://www.gravatar.com/avatar/2a9b8f5273d934fe57daa8cf54c3a017?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
-  "api_key": "55098ddfb223cb6298ca841fb32b680f"
 }]</code></pre>
 <p>
 <strong>CURL command</strong>
 </p>
 
-<pre><code>curl http://localhost:3000/users</code></pre>
+<pre><code>curl http://localhost:3000/<%= current_api_user.test_api_key %>/users</code></pre>
 
 
 <h3 style="font-size: 22px;color: #333;margin: 2em auto 1em;font-weight: 300;"><a name="users.authenticate">Authenticate user</a></h3>
@@ -130,7 +128,6 @@
   "updated_at": "2016-03-31T20:47:56.980Z",
   "gravatar_url": "http://www.gravatar.com/avatar/50e8e8da10dfdfe6169289a99891cfc6?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
   "api_key": "ef86a302cf4d27fdca28c590754305bd",
-  "api_user_id": "6",
   "status": "active"
 }</code></pre>
 <p>
@@ -182,7 +179,6 @@
   "updated_at": "2016-04-01T17:34:58.493Z",
   "gravatar_url": "http://www.gravatar.com/avatar/50e8e8da10dfdfe6169289a99891cfc6?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
   "api_key": null,
-  "api_user_id": "6",
   "status": "active"
 }</code></pre>
 
@@ -191,69 +187,68 @@
 </p>
 <pre><code>curl -H "Content-type: application/json" -X DELETE \
   'http://localhost:4000/<%= current_api_user.test_api_key %>/user_sessions?api_key=:api_key'</code></pre>
+<br style="clear:both;" />
+<hr class="col-xs-8 col-xs-offset-2" /><br style="clear:both;" />
+<h1 style="font-weight:normal; font-size:30px; font-weight:300; margin-top:24px; margin-bottom:20px;">Chat Messages</h1>
 
-
-<h2>Chat Messages</h2>
-
-<h3>Create a messages</h3>
-
+<h3 style="font-size: 22px;color: #333;margin: 0;font-weight: 300; margin-bottom:15px;"><a name="chat_messages.create">Create chat message</a></h3>
+<pre><code>POST <%= current_api_user.test_api_key %>/chat_messages?api_key=:api_key</code></pre>
 <p>
-  The following API command will both create a chat message in the database and push it into Firebase as well.
-
+<strong>Parameters</strong>
 </p>
 
-<table class="table table-striped">
+<table style="padding-left:0;">
   <tr>
-    <td>HTTP Verb</td>
-    <td><code>POST</code></td>
+    <td><strong>Name</code></td>
+    <td><strong>Type</code></td>
+    <td class="text-center"><strong>Description</code></td>
   </tr>
   <tr>
-    <td>URL</td>
-    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/chat_messages?api_key=USERAPIKEY</code></td>
+    <td class="code">api_key</td><td class="code">string</td><td>The value of the user <code>api_key</code> that is returned from either the user creation or authentication requests.
   </tr>
-
 </table>
 
 <p>
-  Expects a payload in the following format (with dummy data loaded in it):
+<strong>Input</strong>
 </p>
+
 <pre><code>{
   "chat_message": {
     "body" : "Hello!"
   }
 }</code></pre>
-<p>
-The following CURL command will trigger the action.
-</p>
 
-<pre><code>curl -H "Content-type: application/json" -d '{ "chat_message": { "body" : "Hello!"} }' 'http://localhost:4000/<%= current_api_user.test_api_key %>/chat_messages?api_key=USERAPIKEY'</code></pre>
-
-
-
-
-<h3>List out all chat messages</h3>
-
-<table class="table table-striped">
-  <tr>
-    <td>HTTP Verb</td>
-    <td><code>GET</code></td>
-  </tr>
-  <tr>
-    <td>URL</td>
-    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/chat_messages</code></td>
-  </tr>
-
-</table>
-
-The following CURL command will trigger it.
-
-
-<pre><code>curl -H "Content-type: application/json" http://localhost:3000/chat_messages</code></pre>
 
 <p>
-The API will clump multiple messages created by the same author into a single message.  The following is an example of the result from the API request.
+  <strong>Response</strong>
 </p>
 
+<pre><code>{
+  "id": 6,
+  "body": "Hello!",
+  "user_id": 3,
+  "created_at": "2016-04-01T17:41:58.061Z",
+  "updated_at": "2016-04-01T17:41:58.061Z",
+  "nickname": "someone",
+  "avatar_url": "http://www.gravatar.com/avatar/50e8e8da10dfdfe6169289a99891cfc6?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg"
+}</code></pre>
+
+<p>
+  <strong>CURL command</strong>
+</p>
+
+<pre><code>curl -H "Content-type: application/json" -d \
+  '{ "chat_message": { "body" : "Hello!"} }' \
+  'http://localhost:4000/<%= current_api_user.test_api_key %>/chat_messages?api_key=:api_key'</code></pre>
+
+
+<h3 style="font-size: 22px;color: #333;margin: 2em auto 1em;font-weight: 300;"><a name="chat_messages.list">List chat messages</a></h3>
+
+
+<pre><code>GET /<%= current_api_user.test_api_key %>/chat_messages</code></pre>
+<p>
+  <strong>Response</strong>
+</p>
 
 <pre><code>[{
   "user_id": 1,
@@ -273,6 +268,17 @@ The API will clump multiple messages created by the same author into a single me
   "time": "02:12 PM"
 }]</code></pre>
 </div>
+
+
+<p><strong>CURL command</strong></p>
+
+<pre><code>curl -H "Content-type: application/json" http://localhost:3000/chat_messages</code></pre>
+
+
+<br style="clear:both;" />
+<br style="clear:both;" />
+<br style="clear:both;" />
+
 </div>
 
 

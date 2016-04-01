@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     mode = mode_and_user[0]
     api_user = mode_and_user[1]
 
-    render :json => api_user.users.where(:mode => mode)
+    render :json => api_user.users.where(:mode => mode).as_json(:include_api_key => false)
   end
   def create
     mode_and_user = ApiUser.mode_and_user(params[:api_user_key])
