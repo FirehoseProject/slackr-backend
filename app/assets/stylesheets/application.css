@@ -16,10 +16,14 @@
 
 .navbar {
   border-radius:0;
+  font-family: Lato, sans-serif;
+}
+.navbar a {
+    font-weight:300 !important;
+
 }
   body {
-    background-color:#F5F8FA;
-    font-family: 'Lato', sans-serif;
+font-family: 'Helvetica Neue', arial, freesans, clean, sans-serif;
     font-size:16px;
   }
   
@@ -30,10 +34,47 @@
     color:black;
   }
 
-  .navbar-brand {
-    color: white !important;
+  .navbar-brand a {
+    color: #999 !important;
     text-decoration:none;
 
-font-family: 'Open Sans Condensed', sans-serif;
-  font-size:32px;
+font-family: 'Lato', sans-serif;
+  font-size:20px;
+  font-weight:500;
+
   }
+
+
+  ol li {
+    font-size:14px;
+    font-weight: normal;
+    margin-top:3.5px;
+  }
+  ol li a {
+    font-weight:300;
+  }
+
+ h3 a, h3 a:hover {
+    text-decoration:none;
+    font-weight:normal;
+    color:black;
+  }
+  .well code {
+        border-radius: 3px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    padding: 0 3px;
+    color: #555;
+    display: inline-block;
+  }
+
+pre  code {
+  font:12px Consolas,'Liberation Mono',Courier,monospace;
+}
+
+p {
+  font-family: 'Helvetica Neue', arial, freesans, clean, sans-serif;
+font-size: 14px;
+font-weight:normal;
+margin:20px 0px;
+}

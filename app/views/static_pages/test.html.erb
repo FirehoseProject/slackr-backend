@@ -1,34 +1,51 @@
 <div class="container">
-<h1>Your API in Test Mode</h1>
+<h1 style="font-weight:normal; font-size:22px;">API (sandbox)</h1>
+<hr />
 <%# link_to 'Switch to Production Mode', production_api_path %>
+<div class="well" style="padding: 0 15px; color: #264c72;border: 1px solid #97c1da;border-radius: 0px;background-color: #d8ebf8; padding:10px 20px;">
+<h1 style="font-weight:normal; font-size:30px; font-weight:300; margin-top:10px; margin-bottom:20px;">Account Credentials</h1>
+
+<table class="table" style="margin-bottom:0;">
+  <tr>
+    <td><strong>Email</strong></td>
+    <td><code><%= current_api_user.email %></code></td>
+  </tr>
+  <tr>
+    <td><strong>Public Key</strong></td>
+    <td><code><%= current_api_user.test_api_key %></code></td>
+  </tr>
+  <tr>
+    <td><strong>Firebase URL</strong></td>
+    <td><code>https://firehose-slackr.firebaseio.com/<%= current_api_user.test_api_key %>/messages</code></td>
+  </tr>
+
+</table>
+</div>
 <br />
-<table class="table table-striped">
-  <tr>
-    <td>API Key</td>
-    <td><%= current_api_user.test_api_key %></td>
-  </tr>
-  <tr>
-    <td>Firebase URL</td>
-    <td>https://firehose-slackr.firebaseio.com/<%= current_api_user.test_api_key %>/messages</td>
-  </tr>
+<hr class="col-xs-8 col-xs-offset-2"/>
+<br style="clear:both;" />
 
-</table>
+<h1 style="font-weight:normal; font-size:30px; font-weight:300; margin-top:4px; margin-bottom:20px;">Users</h1>
+<ol type="i">
+  <li><a href="#users.create">Create a user</a></li>
+  <li>List users</li>
+  <li>Authenticate a user</li>
+  <li>Clear API key</li>
+</ol>
+<h1 style="font-weight:normal; font-size:30px; font-weight:300; margin-top:24px; margin-bottom:20px;">Chat Messages</h1>
+<ol type="i">
+  <li>Create a chat message</li>
+  <li>List chat messages</li>
+</ol>
+<br style="clear:both;" />
 
-<h2>Users</h2>
-<h3>Create a User</h3>
-<table class="table table-striped">
-  <tr>
-    <td>HTTP Verb</td>
-    <td><code>POST</code></td>
-  </tr>
-  <tr>
-    <td>URL</td>
-    <td><code>http://localhost:4000/<%= current_api_user.test_api_key %>/users</code></td>
-  </tr>
-
-</table>
+<hr class="col-xs-8 col-xs-offset-2"/>
+<br style="clear:both;" />
+<h1 style="font-weight:normal; font-size:30px; font-weight:300; margin-top:24px; margin-bottom:20px;">Users</h1>
+<h3 style="font-size: 22px;color: #333;margin: 2em auto 1em;font-weight: 300;"><a name="users.create">Create a User</a></h3>
+<pre><code>POST /<%= current_api_user.test_api_key %>/users</code></pre>
 <p>
-Expects a payload in the following format (with dummy data loaded in it):
+<strong>Input</strong>
 </p>
 <pre><code>{
   "user": {
@@ -38,9 +55,29 @@ Expects a payload in the following format (with dummy data loaded in it):
   }
 }
 </code></pre>
-The following curl command will trigger the action.
 
-<pre><code>curl -H "Content-type: application/json" -d '{ "user": { "email" : "someone@someplace.com", "nickname": "someone", "password": "secretPassword111" } }' 'http://localhost:4000/<%= current_api_user.test_api_key %>/users'</code></pre>
+<p>
+  <strong>Response</strong>
+</p>
+
+<pre><code>{
+  "id": 8,
+  "email": "someokjkjkkjkjne@someplace.com",
+  "nickname": "someone",
+  "created_at": "2016-04-01T17:07:43.681Z",
+  "updated_at": "2016-04-01T17:07:43.681Z",
+  "gravatar_url": "http://www.gravatar.com/avatar/6c7f9db6d0e9184caa3af987ca65645a?d=http%3A%2F%2Fi.imgur.com%2FUPWvbDz.jpg",
+  "api_key": "f6052930880ac0bec03194afa26b5aa6",
+  "api_user_id": "6",
+  "status": "active"
+}</code></pre>
+<p>
+<strong>CURL command</strong>
+</p>
+
+<pre><code>curl -H "Content-type: application/json" -d \
+  '{ "user": { "email" : "someone@someplace.com", "nickname": "someone", "password": "secretPassword111" } }' \
+  'http://localhost:4000/<%= current_api_user.test_api_key %>/users'</code></pre>
 
 
 
