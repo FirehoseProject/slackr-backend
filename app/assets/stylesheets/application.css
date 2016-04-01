@@ -17,6 +17,7 @@
 .navbar {
   border-radius:0;
   font-family: Lato, sans-serif;
+  margin-bottom:0px;
 }
 .navbar a {
     font-weight:300 !important;
@@ -36,7 +37,7 @@ font-family: 'Helvetica Neue', arial, freesans, clean, sans-serif;
 
   .navbar-brand a {
     color: #999 !important;
-    text-decoration:none;
+    text-decoration:none !important;
 
 font-family: 'Lato', sans-serif;
   font-size:20px;
@@ -101,4 +102,39 @@ margin:20px 0px;
     border: 1px solid #ddd;
     padding: 6px 13px;
 }
+
+
+img {
+  width:100px;
+  margin-right:20px;
+  margin-top:30px;
+}
+
+.devise h2 {
+  font-weight:300;
+}
+label {
+  font-weight:200;
+}
+.devise {
+  max-width:400px;
+}
+
+.btn-primary, .btn-primary:active {
+      color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.15);
+    background-color: #60b044;
+    background-image: -webkit-linear-gradient(#8add6d, #60b044);
+    background-image: linear-gradient(#8add6d, #60b044);
+    border-color: #5ca941;
+    font-weight:bold;
+ width:100%;
+}
+
+.input .error {
+  font-weight:bold;
+  font-size:12px;
+  clear:both;
+  padding-bottom:30px;
+  color:red;
 }
