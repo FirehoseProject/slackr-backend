@@ -23,7 +23,7 @@ class ChatMessagesController < ApplicationController
     api_user = mode_and_user[1]
 
 
-    messages = api_user.chat_messages.order(:id).all
+    messages = api_user.chat_messages.where(:mode => mode).order(:id).all
     all_messages = []
     messages.each do |m|
       if all_messages.present? && all_messages.last[:user_id] == m.user_id
