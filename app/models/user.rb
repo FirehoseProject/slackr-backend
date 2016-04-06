@@ -6,8 +6,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
   before_save :populate_gravatar_url
   before_create :populate_api_key
-  validates :nickname, :presence => true
-  validates :email, :uniqueness => {:scope => [:api_user_id, :mode] }
+  validates :email, :uniqueness => {:scope => [:api_user_id, :mode] }, :presence => true
+  validates :nickname, :uniqueness => {:scope => [:api_user_id, :mode] }, :presence => true
+  validate :validate_password
+
   belongs_to :api_user
 
   def populate_gravatar_url
@@ -22,5 +24,13 @@ class User < ActiveRecord::Base
     json = super(options).merge(status: 'active').except("mode", "api_user_id")
     json = json.except("api_key") if options.with_indifferent_access[:include_api_key] == false
     json
+  end
+
+  private
+
+  def validate_password
+    if self.password.blank? && self.encrypted_password.blank?
+      self.errors.add(:password, "cannot be blank")
+    end
   end
 end
