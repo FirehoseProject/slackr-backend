@@ -12,7 +12,7 @@ class ChatMessagesController < ApplicationController
     if mode.to_s == user.mode.to_s && api_user.id == user.api_user.id
       render :json => cm
     else
-      render :json => {errors: cm.errors}, status: :unprocessable_entity
+      render :json => {errors: {:public_key => ['invalid public key']}}, status: :unprocessable_entity
     end
   end
 
