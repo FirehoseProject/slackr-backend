@@ -9,7 +9,11 @@ class ChatMessagesController < ApplicationController
     user = api_user.users.where(:api_key => params[:api_key]).first
 
     cm = user.chat_messages.create(chat_message_params.merge(:mode => mode, :api_user => api_user))
-    render :json => cm
+    if cm.valid?
+      render :json => cm
+    else
+      render :json => {errors: cm.errors}, status: :unprocessable_entity
+    end
   end
 
   def index
