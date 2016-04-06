@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable
   before_save :populate_gravatar_url
   before_create :populate_api_key
-  validates :email, :uniqueness => {:scope => [:api_user_id, :mode] }, :presence => true
+  validates :email, :uniqueness => {:scope => [:api_user_id, :mode] }, :presence => true, :email => true
   validates :nickname, :uniqueness => {:scope => [:api_user_id, :mode] }, :presence => true
   validate :validate_password
 
@@ -31,6 +31,8 @@ class User < ActiveRecord::Base
   def validate_password
     if self.password.blank? && self.encrypted_password.blank?
       self.errors.add(:password, "cannot be blank")
+    elsif self.password.present? && self.password.length < 8
+      self.errors.add(:password, "must be 8 or more characters")
     end
   end
 end
